@@ -6,19 +6,20 @@ import idautils
 
 def lookup_str_in_func(func):
 	found = []
+	func_name = idc.get_func_name(func)
 	addrs = list(idautils.FuncItems(func)) # get list of all the address
 	for line in addrs:
 	    dism = idc.generate_disasm_line(line, 0)
 	    if input_str in dism:
 	    	find_item = hex(line)[:-1] + "\t"
-	    	find_item += dism
-
+	    	find_item += dism + "\t"
+	    	find_item += func_name
 	    	found.append(find_item)
 
 	for one in found:
 		print(one)
 
-print("-------------- [xda] search-dism-str--------------")
+print("----------------- [xda] search-dism-str ----------------")
 
 input_str = idc.AskStr("", "Input string of searching:")
 
@@ -29,7 +30,7 @@ else:
 		flags = idc.get_func_attr(func, FUNCATTR_FLAGS) 
 		if flags & FUNC_LIB or flags & FUNC_THUNK:
 			continue
-		lookup_str_in_func(func)	
+		lookup_str_in_func(func)
 print("--------------------------------------------------------")
 
 
