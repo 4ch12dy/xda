@@ -18,7 +18,7 @@ def lookup_str_in_func(func):
 	for one in found:
 		print(one)
 
-print("-------------- [xda] finDismStrInAllfunc --------------")
+print("-------------- [xda] search-dism-str--------------")
 
 input_str = idc.AskStr("", "Input string of searching:")
 
